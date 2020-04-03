@@ -1,0 +1,95 @@
+<html>
+<head>
+<script>
+    function submitNumber() {
+        
+        let phone = document.querySelector('#phone').value;
+        let countryCode = document.querySelector('#countryCode').value;
+        
+        let comparisonToken = /^\d{10}$/;
+
+        if(!(countryCode == ''))
+        {
+            if(phone.match(comparisonToken))
+            {
+                document.querySelector('#phone').style.border = '';
+                document.querySelector('#error').style.display = 'none';
+                window.location.href = "https://api.whatsapp.com/send?phone=" + countryCode + phone;
+            }
+            else{
+                document.querySelector('#phone').style.border = '2px solid red';
+                document.querySelector('#error').style.display = 'block';
+            }
+        }
+        else {
+            window.location.href = "https://api.whatsapp.com/send?phone=" + countryCode + phone;
+        }
+    }
+</script>
+<style>
+    * {
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 50px;
+    }
+    body {
+        background-color: white;
+    }
+    .outer {
+        height: 100vh;
+        display: flex;
+    }
+    .inner {
+        margin: 30px auto;
+        align-items: center;
+        justify-items: center;
+    }
+    h3 {
+        margin: 10px 0px;
+    }
+    select {
+        margin-top: 30px;
+        padding: 7px;
+    }
+    input {
+        margin-top: 30px;
+        border: 1px solid #818181;
+        padding: 7px;
+    }
+    button {
+        border-radius: 15px;
+        padding: 15px;
+        margin: 30px auto;
+        border: none;
+        color: white;
+        cursor: pointer;
+        background-color: #252525;
+        transition: .3s;
+    }
+    button:active {
+        background-color: black;
+        transform: scale(1.1);
+    }
+    #error {
+        color: red;
+        margin-top: 10px;
+        
+    }
+</style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inner">
+            <h3>Enter phone number:</h3>
+            <select id="countryCode">
+                <option value="+91">+91</option>
+                <option value=""></option>
+            </select> 
+            <input type="tel" id="phone" autocomplete="off">
+            <br>
+            <p id="error" style="display: none;">Enter a valid phone number.</p>
+            <button onclick="submitNumber()">Open Thread</button>
+        </div>
+    </div>
+</body>
+</html>
